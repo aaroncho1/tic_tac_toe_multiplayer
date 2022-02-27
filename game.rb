@@ -29,9 +29,35 @@ class TicTacToeGame
             mark = @current_player.mark
             pos = @current_player.choose_position
             board[pos] = mark
+            break if game_over?
             switch_player
         end
+        game_over_message
     end
+
+    def game_over_message
+        puts "Game over. #{winner} wins!"
+    end
+
+    def winner
+        @grid.each do |row| 
+            if row.all?{|mark| mark == :X}
+                winner = @player1.name
+            elsif row.all?{|mark| mark == :O}
+                winner = @player2.name
+            end
+        end
+
+        @grid.transpose.each do |col|
+            if col.all?{|mark| mark == :X}
+                winner = @player1.name 
+            elsif col.all?{|mark| mark == :O}
+                winner = @player2.name
+            end
+        end
+        winner
+    end
+
 end
 
-TicTacToeGame.new(:X, :Y, "Aaron", "Rhoza").play
+TicTacToeGame.new(:X, :O, "Aaron", "Rhoza").play
