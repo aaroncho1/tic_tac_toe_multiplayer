@@ -13,28 +13,25 @@ class TicTacToeGame
         @board = Board.new
     end
 
-    def sleep_and_clear_175_25
-        sleep 1.75
-        system("clear")
-        sleep 0.25
-    end
-
     def game_over?
         @board.all_spaces_used
     end
 
+    def switch_player
+        @current_player = @current_player == @player1 ? @player2 : @player1
+        puts "#{@current_player.name}'s turn."
+    end
+
     def play
         puts "Let's play Tic Tac Toe! #{current_player.name}, place your #{current_player.mark} by choosing a position in the format # # separated by a space"
-        sleep_and_clear_175_25
         until game_over?
             board.print
-            @current_player.choose_position
-
-
-
-
-            
-
-
-
+            mark = @current_player.mark
+            pos = @current_player.choose_position
+            board[pos] = mark
+            switch_player
+        end
+    end
 end
+
+TicTacToeGame.new(:X, :Y, "Aaron", "Rhoza").play
