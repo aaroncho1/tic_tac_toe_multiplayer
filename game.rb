@@ -19,7 +19,9 @@ class TicTacToeGame
     end
 
     def game_over?
-        
+        @board.all_spaces_used
+    end
+
 
 
     def play
