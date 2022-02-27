@@ -31,6 +31,7 @@ class TicTacToeGame
             mark = @current_player.mark
             pos = @current_player.choose_position
             board[pos] = mark
+            break if winner
             break if game_over?
             switch_player
         end
@@ -38,7 +39,12 @@ class TicTacToeGame
     end
 
     def game_over_message
-        puts "Game over. #{winner} wins!"
+        if winner
+            puts "Game over. #{winner} wins!"
+        else
+            puts "It's a draw!"
+        end
+        board.print
     end
 
     def winner
@@ -47,8 +53,6 @@ class TicTacToeGame
                 return @player1.name
             elsif row.all?{|mark| mark == :O}
                 return @player2.name
-            else  
-                break
             end
         end
 
@@ -59,7 +63,7 @@ class TicTacToeGame
                 return @player2.name
             end
         end
-        
+        false
     end
 
 end
