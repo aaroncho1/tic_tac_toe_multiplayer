@@ -2,6 +2,7 @@ class TicTacToeGame
     require_relative 'player'
 
     attr_accessor :current_player
+    attr_reader :board
 
     def initialize(mark1, mark2, name1, name2)
         @mark1, @mark2 = mark1, mark2
@@ -11,12 +12,24 @@ class TicTacToeGame
         @board = Board.new
     end
 
+    def sleep_and_clear_175_25
+        sleep 1.75
+        system("clear")
+        sleep 0.25
+    end
+
     def game_over?
+        
 
 
     def play
-        puts "Let's play Tic Tac Toe! #{current_player.name} place your #{current_player.mark} by choosing a position in the format # # separated by a space:"
+        puts "Let's play Tic Tac Toe! #{current_player.name} place your #{current_player.mark} by choosing a position in the format # # separated by a space"
+        sleep_and_clear_175_25
         until game_over?
+            board.print
+
+
+
             
 
 
