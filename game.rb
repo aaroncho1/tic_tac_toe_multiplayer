@@ -1,5 +1,6 @@
 class TicTacToeGame
     require_relative 'player'
+    require_relative 'board'
 
     attr_accessor :current_player
     attr_reader :board
@@ -22,13 +23,13 @@ class TicTacToeGame
         @board.all_spaces_used
     end
 
-
-
     def play
-        puts "Let's play Tic Tac Toe! #{current_player.name} place your #{current_player.mark} by choosing a position in the format # # separated by a space"
+        puts "Let's play Tic Tac Toe! #{current_player.name}, place your #{current_player.mark} by choosing a position in the format # # separated by a space"
         sleep_and_clear_175_25
         until game_over?
             board.print
+            @current_player.choose_position
+
 
 
 
