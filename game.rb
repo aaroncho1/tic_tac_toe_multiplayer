@@ -1,4 +1,5 @@
 class TicTacToeGame
+    # require 'byebug'
     require_relative 'player'
     require_relative 'board'
 
@@ -23,6 +24,7 @@ class TicTacToeGame
     end
 
     def play
+        # debugger
         puts "Let's play Tic Tac Toe! #{current_player.name}, place your #{current_player.mark} by choosing a position in the format # # separated by a space"
         until game_over?
             board.print
@@ -40,22 +42,24 @@ class TicTacToeGame
     end
 
     def winner
-        @grid.each do |row| 
+        board.grid.each do |row| 
             if row.all?{|mark| mark == :X}
-                winner = @player1.name
+                return @player1.name
             elsif row.all?{|mark| mark == :O}
-                winner = @player2.name
+                return @player2.name
+            else  
+                break
             end
         end
 
-        @grid.transpose.each do |col|
+        board.grid.transpose.each do |col|
             if col.all?{|mark| mark == :X}
-                winner = @player1.name 
+                return @player1.name 
             elsif col.all?{|mark| mark == :O}
-                winner = @player2.name
+                return @player2.name
             end
         end
-        winner
+        
     end
 
 end

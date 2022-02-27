@@ -1,4 +1,5 @@
 class Board
+    attr_accessor :grid
 
     def initialize
         @grid = Array.new(3){Array.new(3, "_")}
@@ -25,8 +26,5 @@ class Board
             puts row.join(" ")
         end
     end
-
-
-
 
 end
