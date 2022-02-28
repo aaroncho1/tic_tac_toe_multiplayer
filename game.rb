@@ -26,10 +26,15 @@ class TicTacToeGame
     def play
         # debugger
         puts "Let's play Tic Tac Toe! #{current_player.name}, place your #{current_player.mark} by choosing a position in the format # # separated by a space"
-        until game_over?
+        loop do
             board.print
             mark = @current_player.mark
-            pos = @current_player.choose_position
+            begin
+                pos = @current_player.choose_position
+            rescue => e  
+                puts e.message   
+                retry 
+            end
             board[pos] = mark
             break if winner
             break if game_over?
@@ -63,6 +68,25 @@ class TicTacToeGame
                 return @player2.name
             end
         end
+
+        if (0...board.grid.length).all? {|i| board.grid[i][i] == :X}
+            return @player1.name
+        elsif (0...board.grid.length).all? do |i|
+            row = i  
+            col = board.grid.length - 1 - i  
+            (board.[]([row, col])) == :X
+            end
+            return @player1.name
+        elsif (0...board.grid.length).all? {|i| board.grid[i][i] == :O}
+            return @player2.name
+        elsif (0...board.grid.length).all? do |i|
+            row = i  
+            col = board.grid.length - 1 - i  
+            (board.[]([row, col])) == :O
+            end
+            return @player2.name
+        end
+
         false
     end
 

@@ -16,7 +16,6 @@ class Board
         @grid[row][col] = mark 
     end
 
-
     def all_spaces_used
         @grid.all? {|row| row.all?{|mark| @eligible_marks.include?(mark)}}
     end
