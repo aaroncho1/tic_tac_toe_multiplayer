@@ -23,6 +23,14 @@ class TicTacToeGame
         puts "#{@current_player.name}'s turn."
     end
 
+    def check_errors(pos)
+        mark = board[pos]
+        raise "The position is already marked. Please try again" if board.occupied?(mark)
+        pos.each do |num|
+            raise "You must choose a number between 0 and 2. Please try again" if !num.between?(0,2)
+        end
+    end
+
     def play
         # debugger
         puts "Let's play Tic Tac Toe! #{current_player.name}, place your #{current_player.mark} by choosing a position in the format # # separated by a space"
@@ -31,6 +39,7 @@ class TicTacToeGame
             mark = @current_player.mark
             begin
                 pos = @current_player.choose_position
+                check_errors(pos)
             rescue => e  
                 puts e.message   
                 retry 
