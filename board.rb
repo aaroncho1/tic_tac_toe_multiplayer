@@ -20,7 +20,7 @@ class Board
         @eligible_marks.include?(mark)
     end
 
-    def all_spaces_used
+    def all_spaces_used?
         @grid.all? {|row| row.all?{|mark| occupied?(mark)}}
     end
 
@@ -29,5 +29,4 @@ class Board
             puts row.join(" ")
         end
     end
-
 end

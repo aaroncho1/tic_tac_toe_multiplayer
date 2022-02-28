@@ -15,7 +15,7 @@ class TicTacToeGame
     end
 
     def game_over?
-        @board.all_spaces_used
+        @board.all_spaces_used?
     end
 
     def switch_player
@@ -63,39 +63,23 @@ class TicTacToeGame
 
     def winner
         board.grid.each do |row| 
-            if row.all?{|mark| mark == :X}
-                return @player1.name
-            elsif row.all?{|mark| mark == :O}
-                return @player2.name
-            end
+            return @current_player.name if row.all?{|mark| mark == @current_player.mark}
         end
 
         board.grid.transpose.each do |col|
-            if col.all?{|mark| mark == :X}
-                return @player1.name 
-            elsif col.all?{|mark| mark == :O}
-                return @player2.name
-            end
+            return @current_player.name if col.all?{|mark| mark == @current_player.mark}
         end
 
-        if (0...board.grid.length).all? {|i| board.grid[i][i] == :X}
-            return @player1.name
+        if (0...board.grid.length).all? {|i| board.grid[i][i] == @current_player.mark}
+            return @current_player.name
         elsif (0...board.grid.length).all? do |i|
             row = i  
             col = board.grid.length - 1 - i  
-            (board.[]([row, col])) == :X
+            (board.[]([row, col])) == @current_player.mark
             end
-            return @player1.name
-        elsif (0...board.grid.length).all? {|i| board.grid[i][i] == :O}
-            return @player2.name
-        elsif (0...board.grid.length).all? do |i|
-            row = i  
-            col = board.grid.length - 1 - i  
-            (board.[]([row, col])) == :O
-            end
-            return @player2.name
+            return @current_player.name
         end
-
+        
         false
     end
 
