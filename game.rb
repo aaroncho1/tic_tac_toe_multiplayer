@@ -66,16 +66,18 @@ class TicTacToeGame
     end
 
     def winner
+        #check rows
         board.grid.each do |row| 
             return @current_player.name if row.all?{|mark| mark == @current_player.mark}
         end
-
+        #check columns
         board.grid.transpose.each do |col|
             return @current_player.name if col.all?{|mark| mark == @current_player.mark}
         end
-
+        #check diagonal left to right
         if (0...board.grid.length).all? {|i| board.grid[i][i] == @current_player.mark}
             return @current_player.name
+            #check diagonal right to left
         elsif (0...board.grid.length).all? do |i|
             row = i  
             col = board.grid.length - 1 - i  
