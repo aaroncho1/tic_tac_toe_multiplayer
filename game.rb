@@ -31,6 +31,10 @@ class TicTacToeGame
         end
     end
 
+    def mark_pos(pos, mark)
+        board[pos] = mark
+    end
+
     def play
         # debugger
         puts "Let's play Tic Tac Toe! #{current_player.name}, place your #{current_player.mark} by choosing a position in the format # # separated by a space"
@@ -44,7 +48,7 @@ class TicTacToeGame
                 puts e.message   
                 retry 
             end
-            board[pos] = mark
+            mark_pos(pos, mark)
             break if winner
             break if game_over?
             switch_player
@@ -79,7 +83,7 @@ class TicTacToeGame
             end
             return @current_player.name
         end
-        
+
         false
     end
 
