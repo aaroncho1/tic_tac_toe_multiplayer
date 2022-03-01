@@ -79,7 +79,7 @@ class TicTacToeGame
         elsif (0...board.grid.length).all? do |i|
             row = i  
             col = board.grid.length - 1 - i  
-            (board.[]([row, col])) == @current_player.mark
+            board.grid[row][col] == @current_player.mark
             end
             return @current_player.name
         end
